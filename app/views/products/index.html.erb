@@ -78,20 +78,23 @@
                 </div>
 
                 <div class="row">
-                  <% @hotels.each do |hotel| %>
+                  <% @products.each do |product| %>
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4 class="pull-right"><%= hotel["accomodation_type"] %></h4>
-                                <h4><a href="#"><%= hotel["name"] %></a>
+                                <!-- <h4 class="pull-right"><%= hotel["accomodation_type"] %></h4> -->
+                                <h4><a href="#"><%= product["productname"] %></a>
                                 </h4>
-                                <p><%= hotel["address"] %>  <br />
-                                  <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                                <p><a href='<%= product["link"][0]["url"] %>'>Buy</a> 
+
+
+
+                                    </p>
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">15 reviews</p>
-                                <p><%= hotel["star_rating"] %> stars</p>
+                                <!-- <p><%= hotel["star_rating"] %> stars</p> -->
                                 <!-- <p>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
