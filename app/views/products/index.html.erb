@@ -83,10 +83,12 @@
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <!-- <h4 class="pull-right"><%= hotel["accomodation_type"] %></h4> -->
+                                <!-- <h4 class="pull-right"><%= product["amount"] %></h4> -->
                                 <h4><a href="#"><%= product["productname"] %></a>
                                 </h4>
-                                <p><a href='<%= product["link"][0]["url"] %>'>Buy</a> 
+                                <p><%= product["productprice"] %></p>
+                                <!-- <p><a href='<%= product["link"][0]["url"] %>'>Buy</a>  -->
+                                <p><%= link_to "Buy", products_buy_path(:productname => product["productname"], :amount => product["productprice"]), :method => :post %></a>
 
 
 
@@ -94,7 +96,7 @@
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">15 reviews</p>
-                                <!-- <p><%= hotel["star_rating"] %> stars</p> -->
+                                <!-- <p><%= product["tax"] %> stars</p> -->
                                 <!-- <p>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
@@ -144,10 +146,4 @@
     </div>
     <!-- /.container -->
 
-<!-- <h1>Products#index</h1>
-<p>Find me in app/views/products/index.html.erb</p>
-<% @hotels.each do |hotel| %>
-<%= hotel["name"] %>
-<%= hotel["address"] %>
 
-<% end %> -->
