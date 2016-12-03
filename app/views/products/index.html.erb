@@ -23,6 +23,12 @@
                     <li>
                         <a href="#">Contact</a>
                     </li>
+                    <li>
+                      <%= form_tag(products_index_path, :method => "get", id: "search-form") do %>
+                        <%= text_field_tag :search, params[:search], placeholder: "Search Products" %>
+                        <%= submit_tag "Search", :name => nil %>
+                      <% end %>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -83,11 +89,11 @@
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <!-- <h4 class="pull-right"><%= product["amount"] %></h4> -->
-                                <h4><a href="#"><%= product["productname"] %></a>
+                                
+                                <h4><%= link_to product["productname"], root_path %>
                                 </h4>
                                 <p><%= product["productprice"] %></p>
-                                <!-- <p><a href='<%= product["link"][0]["url"] %>'>Buy</a>  -->
+                                
                                 <p><%= link_to "Buy", products_buy_path(:productname => product["productname"], :amount => product["productprice"]), :method => :post %></a>
 
 

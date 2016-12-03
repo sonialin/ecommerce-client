@@ -1,7 +1,14 @@
 class ProductsController < ApplicationController
   def index
-    @products = HTTParty.get('http://localhost:8082/productservice/product',
-    :headers =>{'Content-Type' => 'application/json'} )
+
+    if params[:search]
+      @products = HTTParty.get('http://localhost:8082/productservice/products/' + params[:search],
+      :headers =>{'Content-Type' => 'application/json'} )
+    else
+      @products = HTTParty.get('http://localhost:8082/productservice/product',
+      :headers =>{'Content-Type' => 'application/json'} )
+    end
+    
   end
 
   def show
