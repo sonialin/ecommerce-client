@@ -1,0 +1,56 @@
+<h1>List of All Orders</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <td>
+        Product Name
+      </td>
+      <td>
+        Product Unit Price
+      </td>
+      <td>
+        Product Quantity
+      </td>
+      <td>
+        Subtotal
+      </td>
+      <td>
+        Tax
+      </td>
+      <td>
+        Total
+      </td>
+      <td>
+        Order Status
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td>
+          <%= order["productname"] %>
+        </td>
+        <td>
+          <%= order["amount"] %>
+        </td>
+        <td>
+          <%= order["productqty"] %>
+        </td>
+        <td>
+          <%= order["amount"].to_f * order["productqty"].to_i %>
+        </td>
+        <td>
+          <%= order["tax"] %>
+        </td>
+        <td>
+          <%= order["totalprice"] %>
+        </td>
+        <td>
+          <%= order["orderstatus"] %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table> 
