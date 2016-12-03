@@ -13,7 +13,24 @@
   </head>
 
   <body>
-    <%= yield %>
+    <body>
+      <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+          <div class="navbar-header">
+            <%= link_to 'EcommerceClient', root_path, :class => 'navbar-brand' %>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><%= link_to 'Products', products_index_path %></li>
+            <li><a href="#">Sellers</a></li>
+            <li><%= link_to 'Orders', orders_index_path %></li>
+          </ul>
+          <p class="navbar-text navbar-right"> <a href="#">Sonia lin</a></p>
+        </div>
+      </nav>
+      <div class="container">
+        <%= yield %>
+      </div>
+    </body>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
