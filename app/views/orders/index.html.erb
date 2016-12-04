@@ -60,7 +60,9 @@
           <%= order["orderstatus"] %>
         </td>
         <td>
-          <%= link_to "Cancel", orders_cancel_path(:orderID => order["orderID"]), :method => :patch %>
+          <% if order["orderstatus"]!="Cancelled" %>
+            <%= link_to "Cancel", orders_cancel_path(:orderID => order["orderID"]), :method => :patch %>
+          <% end %>
         </td>
       </tr>
     <% end %>
