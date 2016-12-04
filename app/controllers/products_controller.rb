@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
     else
       @products = HTTParty.get('http://localhost:8082/productservice/product',
       :headers =>{'Content-Type' => 'application/json'} )
+      @products = @products.sort_by {|product| product["productname"]}
     end
     
   end

@@ -4,6 +4,9 @@
   <thead>
     <tr>
       <td>
+        Order Date
+      </td>
+      <td>
         Product Name
       </td>
       <td>
@@ -32,6 +35,9 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
+        <td>
+          <%= order["orderdate"] %>
+        </td>
         <td>
           <%= order["productname"] %>
         </td>
