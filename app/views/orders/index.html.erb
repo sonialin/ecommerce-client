@@ -24,6 +24,9 @@
       <td>
         Order Status
       </td>
+      <td>
+        Action
+      </td>
     </tr>
   </thead>
   <tbody>
@@ -49,6 +52,9 @@
         </td>
         <td>
           <%= order["orderstatus"] %>
+        </td>
+        <td>
+          <%= link_to "Cancel", orders_cancel_path(:orderID => order["orderID"]), :method => :patch %>
         </td>
       </tr>
     <% end %>
