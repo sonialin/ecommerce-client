@@ -9,5 +9,7 @@ class OrdersController < ApplicationController
     @result = HTTParty.patch('http://localhost:8082/orderservice/cancelorder', 
       :body => {:orderID => params[:orderID]}.to_json, 
       :headers => { 'Content-Type' => 'application/json' })
+    redirect_to orders_index_path
+    flash[:notice] = 'An order has been cancelled.'
   end
 end

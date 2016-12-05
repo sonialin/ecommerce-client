@@ -27,9 +27,11 @@
       <td>
         Order Status
       </td>
-      <td>
-        Action
-      </td>
+      <% if current_user %>
+        <td>
+          Action
+        </td>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -60,8 +62,10 @@
           <%= order["orderstatus"] %>
         </td>
         <td>
-          <% if order["orderstatus"]!="Cancelled" %>
-            <%= link_to "Cancel", orders_cancel_path(:orderID => order["orderID"]), :method => :patch %>
+          <% if current_user %>
+            <% if order["orderstatus"]!="Cancelled" %>
+              <%= link_to "Cancel", orders_cancel_path(:orderID => order["orderID"]), :method => :patch %>
+            <% end %>
           <% end %>
         </td>
       </tr>

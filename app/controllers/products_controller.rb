@@ -19,5 +19,7 @@ class ProductsController < ApplicationController
     @result = HTTParty.post('http://localhost:8082/orderservice/order', 
       :body => {:username => 'sonialin', :productname => params[:productname], :productqty => 1, :amount => params[:amount]}.to_json, 
       :headers => { 'Content-Type' => 'application/json' })
+    redirect_to products_index_path
+    flash[:notice] = 'An order has been made.'
   end
 end

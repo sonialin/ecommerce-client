@@ -22,12 +22,11 @@
       <td>
         Product Price
       </td>
-      <td>
-        Product Rating
-      </td>
-      <td>
-        Buy
-      </td>
+      <% if current_user %>
+        <td>
+          Buy
+        </td>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -39,12 +38,11 @@
         <td>
           <%= product["productprice"] %>
         </td>
-        <td>
-          5 Reviews
-        </td>
-        <td>
-          <%= link_to "Buy", products_buy_path(:productname => product["productname"], :amount => product["productprice"]), :method => :post %>
-        </td>
+        <% if current_user %>
+          <td>
+            <%= link_to "Buy", products_buy_path(:productname => product["productname"], :amount => product["productprice"]), :method => :post %>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
