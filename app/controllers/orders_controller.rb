@@ -9,7 +9,25 @@ class OrdersController < ApplicationController
     @result = HTTParty.patch('http://localhost:8082/orderservice/cancelorder', 
       :body => {:orderID => params[:orderID]}.to_json, 
       :headers => { 'Content-Type' => 'application/json' })
-    redirect_to orders_index_path
-    flash[:notice] = 'An order for "' + params[:productname] + '" has been cancelled.'
+    if @result.code == 200
+      redirect_to orders_index_path
+      flash[:notice] = 'An order for "' + params[:productname] + '" has been cancelled.'
+    else
+      redirect_to orders_index_path
+      flash[:notice] = 'Oops - there was an error.'
+    end
+  end
+
+  def ship
+    @result = HTTParty.patch('http://localhost:8082/orderservice/shiporder', 
+      :body => {:orderID => params[:orderID]}.to_json, 
+      :headers => { 'Content-Type' => 'application/json' })
+    if @result.code == 200
+      redirect_to orders_index_path
+      flash[:notice] = 'An order for "' + params[:productname] + '" has been shipped.'
+    else
+      redirect_to orders_index_path
+      flash[:notice] = 'Oops - there was an error.'
+    end
   end
 end

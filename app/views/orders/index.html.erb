@@ -38,44 +38,83 @@
     </tr>
   </thead>
   <tbody>
-    <% @orders.each do |order| %>
-      <% if order["username"] == current_user.username %>
-        <tr>
-          <td>
-            <%= order["orderdate"] %>
-          </td>
-          <td>
-            <%= order["productname"] %>
-          </td>
-          <td>
-            <%= order["amount"] %>
-          </td>
-          <td>
-            <%= order["productqty"] %>
-          </td>
-          <td>
-            <%= order["amount"].to_f * order["productqty"].to_i %>
-          </td>
-          <td>
-            <%= order["tax"] %>
-          </td>
-          <td>
-            <%= order["totalprice"] %>
-          </td>
-          <td>
-            <%= order["orderstatus"] %>
-          </td>
-          <td>
-            <%= order["username"] %>
-          </td>
-          <td>
-            <% if current_user %>
-              <% if order["orderstatus"]!="Cancelled" %>
-                <%= link_to "Cancel", orders_cancel_path(:orderID => order["orderID"], :productname => order["productname"]), :method => :patch %>
-              <% end %>
-            <% end %>
-          </td>
-        </tr>
+    <% if current_user %>
+      <% @orders.each do |order| %>
+        <% if current_user.role == 'customer' %>
+          <% if order["username"] == current_user.username %>
+            <tr>
+              <td>
+                <%= order["orderdate"] %>
+              </td>
+              <td>
+                <%= order["productname"] %>
+              </td>
+              <td>
+                <%= order["amount"] %>
+              </td>
+              <td>
+                <%= order["productqty"] %>
+              </td>
+              <td>
+                <%= order["amount"].to_f * order["productqty"].to_i %>
+              </td>
+              <td>
+                <%= order["tax"] %>
+              </td>
+              <td>
+                <%= order["totalprice"] %>
+              </td>
+              <td>
+                <%= order["orderstatus"] %>
+              </td>
+              <td>
+                <%= order["username"] %>
+              </td>
+              <td>
+                <% if order["orderstatus"]!="Cancelled" %>
+                  <%= link_to "Cancel", orders_cancel_path(:orderID => order["orderID"], :productname => order["productname"]), :method => :patch %>
+                <% end %> 
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <% if order["productname"].include?("Samsung") %>
+            <tr>
+              <td>
+                <%= order["orderdate"] %>
+              </td>
+              <td>
+                <%= order["productname"] %>
+              </td>
+              <td>
+                <%= order["amount"] %>
+              </td>
+              <td>
+                <%= order["productqty"] %>
+              </td>
+              <td>
+                <%= order["amount"].to_f * order["productqty"].to_i %>
+              </td>
+              <td>
+                <%= order["tax"] %>
+              </td>
+              <td>
+                <%= order["totalprice"] %>
+              </td>
+              <td>
+                <%= order["orderstatus"] %>
+              </td>
+              <td>
+                <%= order["username"] %>
+              </td>
+              <td>
+                <% if order["orderstatus"] == "Paid" %>
+                  <%= link_to "Ship", orders_ship_path(:orderID => order["orderID"], :productname => order["productname"]), :method => :patch %>
+                <% end %> 
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
       <% end %>
     <% end %>
   </tbody>

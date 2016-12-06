@@ -1,0 +1,23 @@
+<h2>New Product</h2>
+
+<%= form_tag(products_add_path, :method => :post, :class => "input-group") do %>
+
+  <div class="form-group">
+    <label>Product Name</label>
+    <%= text_field_tag :productname, params[:productname], placeholder: "Product name", :class => "form-control" %>
+  </div>
+  <div class="form-group">
+    <label>Product Description</label>
+    <%= text_field_tag :productdescription, params[:productdescription], placeholder: "Product description", :class => "form-control" %>
+  </div>
+  <div class="form-group">
+    <label>Product Price</label>
+    <%= text_field_tag :productprice, params[:productprice], placeholder: "Product Price", :class => "form-control" %>
+  </div>
+  <br />
+  <br />
+  <div class="form-group">
+    <%= submit_tag "Submit", :name => nil, :class => "btn btn-default" %>
+  </div>
+  
+<% end %>

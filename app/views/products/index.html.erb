@@ -1,7 +1,11 @@
-<h1>List of All Products</h1>
+<% if current_user && current_user.role == 'partner' %>
+  <h1>List of My Products</h1>
+<% else %>
+  <h1>List of All Products</h1>
+<% end %>
 
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-9">
     <div class="input-group">
       <%= form_tag(products_index_path, :method => "get", id: "search-form", :class => "input-group") do %>
         <%= text_field_tag :search, params[:search], placeholder: "Search Products", :class => "form-control" %>
@@ -10,6 +14,13 @@
         </span>
       <% end %>
     </div>
+  </div>
+  <div class="col-lg-3">
+    <% if current_user %>
+  <% if current_user.role == 'partner' %>
+   <%= link_to "Add Product", products_new_path, :class => 'btn btn-default pull-right' %>
+  <% end %>
+<% end %>
   </div>
 </div>
 
@@ -22,7 +33,7 @@
       <td>
         Product Price
       </td>
-      <% if current_user %>
+      <% if current_user && current_user.role == 'customer' %>
         <td>
           Buy
         </td>
@@ -31,19 +42,35 @@
   </thead>
   <tbody>
     <% @products.each do |product| %>
-      <tr>
-        <td>
-          <%= link_to product["productname"], root_path %>
-        </td>
-        <td>
-          <%= product["productprice"] %>
-        </td>
-        <% if current_user %>
+      <% if current_user && current_user.role == 'partner' && product["productownerID"] == 2%>
+        <tr>
           <td>
-            <%= link_to "Buy", products_buy_path(:productname => product["productname"], :amount => product["productprice"]), :method => :post %>
+            <%= product["productname"] %>
           </td>
-        <% end %>
-      </tr>
+          <td>
+            <%= product["productprice"] %>
+          </td>
+          <% if current_user && current_user.role == 'customer' %>
+            <td>
+              <%= link_to "Buy", products_buy_path(:productname => product["productname"], :amount => product["productprice"]), :method => :post %>
+            </td>
+          <% end %>
+        </tr>
+      <% else %>
+        <tr>
+          <td>
+            <%= product["productname"] %>
+          </td>
+          <td>
+            <%= product["productprice"] %>
+          </td>
+          <% if current_user && current_user.role == 'customer' %>
+            <td>
+              <%= link_to "Buy", products_buy_path(:productname => product["productname"], :amount => product["productprice"]), :method => :post %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
-</table> 
+</table>
