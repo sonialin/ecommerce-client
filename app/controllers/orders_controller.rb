@@ -1,8 +1,15 @@
 class OrdersController < ApplicationController
+  require 'will_paginate/array'
   def index
     @orders = HTTParty.get('http://localhost:8082/orderservice/order',
     :headers =>{'Content-Type' => 'application/json'} )
+    if current_user.role == 'customer'
+      @orders = @orders.select {|order| order["username"] == current_user.username}
+    else
+      @orders = @orders.select {|order| order["productname"].include?("Samsung")}
+    end
     @orders = @orders.sort_by {|order| order["orderdate"]}.reverse
+    @orders = @orders.paginate(:page => params[:page], :per_page => 10)
   end
 
   def cancel

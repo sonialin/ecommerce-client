@@ -1,8 +1,14 @@
 class ProductsController < ApplicationController
+  require 'will_paginate/array'
   def index
     if params[:search]
       @products = HTTParty.get('http://localhost:8082/productservice/products/' + params[:search],
       :headers =>{'Content-Type' => 'application/json'} )
+      if current_user && current_user.role == 'partner'
+        @products = @products.select {|product| product["productownerID"] == 2}
+      end
+      @products = @products.sort_by {|product| product["productname"]}
+      @products = @products.paginate(:page => params[:page], :per_page => 10)
       if @products.empty?
         redirect_to products_index_path
         flash[:notice] = 'No product with the keyword "' + params[:search] + '" has been found.'
@@ -10,7 +16,11 @@ class ProductsController < ApplicationController
     else
       @products = HTTParty.get('http://localhost:8082/productservice/product',
       :headers =>{'Content-Type' => 'application/json'} )
+      if current_user && current_user.role == 'partner'
+        @products = @products.select {|product| product["productownerID"] == 2}
+      end
       @products = @products.sort_by {|product| product["productname"]}
+      @products = @products.paginate(:page => params[:page], :per_page => 10)
       if @products.empty?
         redirect_to products_index_path
         flash[:notice] = 'There is no product in the service database.'
