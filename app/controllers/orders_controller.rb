@@ -10,6 +10,6 @@ class OrdersController < ApplicationController
       :body => {:orderID => params[:orderID]}.to_json, 
       :headers => { 'Content-Type' => 'application/json' })
     redirect_to orders_index_path
-    flash[:notice] = 'An order has been cancelled.'
+    flash[:notice] = 'An order for "' + params[:productname] + '" has been cancelled.'
   end
 end
