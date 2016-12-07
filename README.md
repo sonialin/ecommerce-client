@@ -1,24 +1,10 @@
-# README
+This is the client side app that consumes the server-side ecommerce app built for the comp433 web services project.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The app is written by Sonia Lin with the support of server-side services written by Ting Liu, Jianshi Yuan, and Sonia Lin.
 
-Things you may want to cover:
+The purpose of the app is to:
+-- provide an overview of what is achieved on the server side
+-- validate the services and its robustness
+-- add local functinoalities to explore potential services addition
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The app would be playing the role of the platform Amazon, which enables its partners to add products and manage orders, and its customers to order products and cancel orders.
