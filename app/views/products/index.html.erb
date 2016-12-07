@@ -45,7 +45,7 @@
       <% if current_user && current_user.role == 'partner' && product["productownerID"] == 2%>
         <tr>
           <td>
-            <%= product["productname"] %>
+            <%= link_to product["productname"], product_path(:id => product['productID'], :product_link => product['link'][1]['url']) %>
           </td>
           <td>
             <%= product["productprice"] %>
@@ -59,7 +59,7 @@
       <% else %>
         <tr>
           <td>
-            <%= product["productname"] %>
+            <%= link_to product["productname"], product_path(:id => product['productID'], :product_link => product['link'][1]['url']) %>
           </td>
           <td>
             <%= product["productprice"] %>

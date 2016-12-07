@@ -4,6 +4,11 @@ class ProductsController < ApplicationController
     if params[:search]
       @products = HTTParty.get('http://localhost:8082/productservice/products/' + params[:search],
       :headers =>{'Content-Type' => 'application/json'} )
+      respond_to do |format|
+        format.html
+        format.xml { render :xml => @products }
+        format.json { render :json => @products }
+      end
       if current_user && current_user.role == 'partner'
         @products = @products.select {|product| product["productownerID"] == 2}
       end
@@ -16,6 +21,11 @@ class ProductsController < ApplicationController
     else
       @products = HTTParty.get('http://localhost:8082/productservice/product',
       :headers =>{'Content-Type' => 'application/json'} )
+      respond_to do |format|
+        format.html
+        format.xml { render :xml => @products }
+        format.json { render :json => @products }
+      end
       if current_user && current_user.role == 'partner'
         @products = @products.select {|product| product["productownerID"] == 2}
       end
@@ -30,7 +40,8 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
+    @product = HTTParty.get(params[:product_link],
+      :headers =>{'Content-Type' => 'application/json'})
   end
 
   def new

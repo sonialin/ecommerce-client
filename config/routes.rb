@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   get 'products/index'
   get 'products/new'
+  get 'products/:id', to: 'products#show', as: 'product'
   get 'orders/index'
   root :to => "products#index"
   match "products/buy" => "products#buy", as: :products_buy, via: :post
